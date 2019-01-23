@@ -8,14 +8,14 @@ class Usuarios extends CI_Controller{
 		$this->load->helper('url');
 		$this->load->model('login_model');	
 	}
-
-	public function index()
-     {
-          //get the posted values
+	public function logout(){
+      $this->session->sess_destroy();
+      redirect(base_url('usuarios/index') );
+    }
+	public function index(){
+        //get the posted values
         $username = $this->input->post("txt_username");
         $password= $this->input->post("txt_password"); 
-
-        //$password = md5($passw);
 
         //set validations
         $this->form_validation->set_rules("txt_username", "Username", "trim|required");
@@ -32,29 +32,30 @@ class Usuarios extends CI_Controller{
             if ($this->input->post('btn_login') == "Iniciar Sesion")
             {
                     
-                $usr_result = $this->login_model->get_user($username, $password);
-                $resu_id = $this->login_model->get_di($username, $password); 
+                $get_usuario = $this->login_model->get_usuario($username, $password);
+                $get_rut = $this->login_model->get_rut($username, $password); 
 
-                $id = $resu_id['id'];
+                $rut = $get_rut['rut'];
                 $sistema= 'SistemaUsuarios';
-                $permiso= $this->login_model->get_nivel($id,$sistema);
+                $permiso= $this->login_model->get_nivel($rut,$sistema);
 
 	             
-	            if ($usr_result){
+	            if ($get_usuario){
 		          	if ($permiso){		                 
 		                $sessiondata = array(
 		                     'username' => $username,
 		                     'loginuser' => TRUE,
-		                     'id_usuario'=> $id
+		                     'rut_usuario'=> $rut
 		                );
 		                $this->session->set_userdata('nivel',$permiso['nivel_acceso']);
 		                $this->session->set_userdata('username',$sessiondata['username']);
-		                $this->session->set_userdata('id_usuario',$sessiondata['id_usuario']);	
- 						if ($permiso['nivel_acceso']== 4 ) {
- 							redirect(base_url('index.php/') );
- 						}else{
-		                	redirect(base_url('index.php/') );
- 						}
+		                $this->session->set_userdata('rut_usuario',$sessiondata['rut_usuario']);	
+		                
+ 					
+ 						redirect(base_url('usuarios/administracion') );
+ 						
+ 						
+
 		            }else{
 			               $this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Usted no  tiene permisos para ingresar a este sistema</div>');
 			               
@@ -75,4 +76,19 @@ class Usuarios extends CI_Controller{
         }
     }    
 
+    public function administracion(){
+    	$unermane = $this->session->userdata('username');
+		$nivel= $this->session->userdata('nivel');		 
+		$rut = $this->session->userdata('rut_usuario'); 
+
+		if (is_null($unermane)) {		
+
+		$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Debe inciar sesion antes</div>');
+			redirect(base_url('usuarios/index') );
+
+		}else{
+			$this->load->view('administracion');
+		}
+
+    }
 }

@@ -6,7 +6,7 @@ class login_model extends CI_Model
 
      //get the username & password 
      function get_pass($usr, $pwd)     {
-          $sql = "select password from sistemas_users where username = '" . $usr . "' and password = '" . $pwd . "'";
+          $sql = "select password from persona where username = '" . $usr . "' and password = '" . $pwd . "'";
           $query = $this->db->query($sql);
           if($query->num_rows() > 0){
                return $query->row_array();
@@ -18,7 +18,7 @@ class login_model extends CI_Model
      function datos_user($id)     {
           $this->db->select('*' );      
           $this->db->where('id', $id);
-          $query = $this->db->get('sistemas_users');
+          $query = $this->db->get('persona');
           if($query->num_rows() > 0){
                return $query->row();
           }else{
@@ -29,7 +29,7 @@ class login_model extends CI_Model
           $dat= "Adquisiciones";
           $this->db->select('id ,nombre,apellido,cargo,departamento' );       
           $this->db->where('departamento', $dat);
-          $query = $this->db->get('sistemas_users');
+          $query = $this->db->get('persona');
           if($query->num_rows() > 0){
                return $query->result();
           }else{
@@ -38,10 +38,10 @@ class login_model extends CI_Model
      }
      
 
-     function get_user($usr, $pwd){
+     function get_usuario($usr, $pwd){
           
        
-          $sql = "select * from sistemas_users where username = '" . $usr . "' and password = '" . $pwd . "'";
+          $sql = "select * from usuario where username = '" . $usr . "' and password = '" . $pwd . "'";
           $query = $this->db->query($sql);
           if($query->num_rows() > 0){
                return $query->result();
@@ -50,8 +50,8 @@ class login_model extends CI_Model
           }
           
      }
-     function get_di($usr, $pwd){
-          $sql = "select id from sistemas_users where username = '" . $usr . "' and password = '" . $pwd . "'";
+     function get_rut($rut, $pwd){
+          $sql = "select rut from usuario where username = '" . $rut . "' and password = '" . $pwd . "'";
           $query = $this->db->query($sql);
           if($query->num_rows() > 0){
                return $query->row_array();
@@ -61,8 +61,8 @@ class login_model extends CI_Model
      }
 
 
-     function get_nivel($usr, $idS){
-          $sql = "select nivel_acceso from sistemas_sistemasxusuario where id_sistema = '" . $idS . "'and id_usuario= '" . $usr . "'";
+     function get_nivel($rut, $idS){
+          $sql = "select nivel_acceso from permisosxusuarios where id_sistema = '" . $idS . "' and rut_usuario= '" . $rut . "'";
           $query = $this->db->query($sql);
           if($query->num_rows() > 0){
                return $query->row_array();
@@ -74,7 +74,7 @@ class login_model extends CI_Model
 
      function form_insert($data){
      // Inserting in Table(students) of Database(college)
-     $this->db->insert('sistemas_users', $data);
+     $this->db->insert('persona', $data);
      }
 
 }
