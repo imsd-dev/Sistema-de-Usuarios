@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $config['base_url'] = '';
 
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 $config['uri_protocol']	= 'REQUEST_URI';
 
@@ -44,15 +44,17 @@ $config['cache_path'] = '';
 
 $config['cache_query_string'] = FALSE;
 
-$config['encryption_key'] = '';
+$config['encryption_key'] =  bin2hex ('O��!�1�<���y�H$P');
 
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200;
-$config['sess_save_path'] = NULL;
+$config['sess_expiration'] = 3600;
+$config['sess_save_path'] = null;
+//$config['sess_save_path'] = APPPATH . 'cache/sessions/';
+//$config['sess_save_path'] = 'sistemas_sesiones';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
-$config['sess_regenerate_destroy'] = FALSE;
+$config['sess_regenerate_destroy'] = TRUE;
 
 $config['cookie_prefix']	= '';
 $config['cookie_domain']	= '';
