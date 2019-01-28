@@ -2,67 +2,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-    <title>Inicio de sesión</title>    
+  <title>Inicio de sesión</title>    
     
-
   <style type="text/css">
-     body{
-        background-color: #34495e; 
-        font-family: Arial;
-     }
-     h2{
-        color: #ecf0f1;
-        font-size: 38px;
-        margin-top: 20px;
-     }
-     h4 {
-        color: #ecf0f1;
-        font-size: 28px;
-     }
+      body{
+         background-color: #34495e; 
+         font-family: Arial;
+      }
+      h2{
+         color: #ecf0f1;
+         font-size: 38px;
+         margin-top: 20px;
+      }
+      h4 {
+         color: #ecf0f1;
+         font-size: 28px;
+      }
+        
+      #containerlogin{
+        background-color: #F5F5F5;
+        color: #34495e;
+        max-width: 600px;
+      }
       
-  
-    #containerlogin{
-      background-color: #F5F5F5;
-      color: #34495e;
-      max-width: 600px;
-    }
-    
-    #row{
-      
-      padding: 20px;
-      width: 100%;
+      #row{
+        
+        padding: 20px;
+        width: 100%;
 
-    }
+      }
 
-     @media screen and (max-width: 400px) {
-        h2 { 
-          font-size :33px;
-        }
-        h4{
-          font-size :19px;
-        }
-       }
+       @media screen and (max-width: 400px) {
+          h2 { 
+            font-size :33px;
+          }
+          h4{
+            font-size :19px;
+          }
+         }
 
-       hr {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            margin-right: 70px;
-            margin-left: 70px;
-            border: 0;
-            border-top-color: currentcolor;
-            border-top-style: none;
-            border-top-width: 0px;
-            border-top: 1px solid #eee;
-        }
+         hr {
+              margin-top: 20px;
+              margin-bottom: 20px;
+              margin-right: 70px;
+              margin-left: 70px;
+              border: 0;
+              border-top-color: currentcolor;
+              border-top-style: none;
+              border-top-width: 0px;
+              border-top: 1px solid #eee;
+          }
   </style>
-    
 </head>
 <body >
 <div class="container" >
@@ -114,9 +111,8 @@
                </div>
           </fieldset>
           </form>
-          <?php echo form_close(); ?>
-          <?php echo $this->session->flashdata('msg'); ?>
-          <?php //echo $this->session->flashdata('err'); ?>
+         
+          <?php echo $this->session->flashdata('msg'); ?>          
       </div>
   </div>
  </div>

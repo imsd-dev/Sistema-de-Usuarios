@@ -12,6 +12,7 @@ class Usuarios extends CI_Controller{
       $this->session->sess_destroy();
       redirect(base_url('usuarios/index') );
     }
+
 	public function index(){
         //get the posted values
         $username = $this->input->post("txt_username");
@@ -80,15 +81,68 @@ class Usuarios extends CI_Controller{
     	$unermane = $this->session->userdata('username');
 		$nivel= $this->session->userdata('nivel');		 
 		$rut = $this->session->userdata('rut_usuario'); 
+		$data['user'] = $this->login_model->datos_user($rut);		  
 
-		if (is_null($unermane)) {		
-
-		$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Debe inciar sesion antes</div>');
+		if (is_null($unermane)){		
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Debe inciar sesion antes</div>');
 			redirect(base_url('usuarios/index') );
-
 		}else{
-			$this->load->view('administracion');
+			$data['funcionarios'] = $this->login_model->get_funcionarios();
+			$data['deptos'] = $this->login_model->get_departamento();
+			$this->load->view('administracion',$data);
 		}
 
     }
+
+    //Agregar Usuario
+	public function agregarpersona(){
+		$existe = $this->login_model->existepersona();
+		
+		if (!$existe) {
+			 
+			$result = $this->login_model->agregarpersona();
+			if($result){ 
+				$this->session->set_flashdata('success_msg', 'Usuario agregado');
+				redirect(base_url('usuarios/administracion') );
+			}else{
+				$this->session->set_flashdata('error_msg', $result);		
+				redirect(base_url('usuarios/administracion') );
+			}	
+
+		}else{
+			$this->session->set_flashdata('error_msg', ' Ya existe esta persona');
+				redirect(base_url('usuarios/administracion') );
+		}		
+	}
+
+	public function edite($rut){
+		$unermane = $this->session->userdata('username');
+		$nivel= $this->session->userdata('nivel');		 
+		$rut = $this->session->userdata('rut_usuario'); 
+		if (is_null($unermane)){		
+		$this->session->set_flashdata('msg','<div class="alert alert-danger text-center">Debe inciar sesion antes</div>');
+			redirect(base_url('usuarios/index') );
+
+		}else{
+
+
+		$data['orga'] = $this->m->organizaciones();		
+		//$data['blogs'] = $this->m->getBlog();
+		$data['blog'] = $this->m->getBlogId($rut);
+
+		$data['datito']= $this->m->organi();	
+		
+	    /* Se obtienen los registros a mostrar*/
+	    $table['blogs'] = $this->m->getBlog();  
+	      
+
+		$this->session->set_flashdata('modificar', 'Modificar agregado');
+		$this->load->view('layout/header',$table);			
+		$this->load->view('blog/index', $data);
+		
+		}
+	}
+
+
+
 }
